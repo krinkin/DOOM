@@ -572,6 +572,21 @@ void IdentifyVersion (void)
     char*	plutoniawad;
     char*	tntwad;
 
+	char* iwadfile;
+    int p;
+    
+    if ((p = M_CheckParm("-iwad"))) {
+        if (p < myargc-1) {
+            iwadfile = myargv[p+1];
+            if (!access(iwadfile, R_OK)) {
+                gamemode = shareware;  
+                D_AddFile(iwadfile);
+                return;
+            }
+        }
+    }
+	
+
 #ifdef NORMALUNIX
     char *home;
     char *doomwaddir;
